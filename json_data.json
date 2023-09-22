@@ -1,0 +1,344 @@
+{
+    "timestamp": "2023-09-22 14:32:57",
+    "data": {
+        "12:00, PM LA Chargers - MIN Vikings (FOX)": [
+            {
+                "team_number": "451",
+                "team_name": "LA Chargers",
+                "betting_data": [
+                    "+1 -110",
+                    "  o54 -110"
+                ]
+            },
+            {
+                "team_number": "452",
+                "team_name": "MIN Vikings",
+                "betting_data": [
+                    "-1 -110",
+                    "  u54 -110"
+                ]
+            }
+        ],
+        "12:00, PM TEN Titans - CLE Browns (CBS)": [
+            {
+                "team_number": "453",
+                "team_name": "TEN Titans",
+                "betting_data": [
+                    "+3.5 -115",
+                    "+155",
+                    "o39.5 -110"
+                ]
+            },
+            {
+                "team_number": "454",
+                "team_name": "CLE Browns",
+                "betting_data": [
+                    "-3.5 -105",
+                    "-180",
+                    "u39.5 -110"
+                ]
+            }
+        ],
+        "12:00, PM HOU Texans - JAX Jaguars (FOX)": [
+            {
+                "team_number": "455",
+                "team_name": "HOU Texans",
+                "betting_data": [
+                    "+8 -110",
+                    "+305",
+                    "o44.5 -105"
+                ]
+            },
+            {
+                "team_number": "456",
+                "team_name": "JAX Jaguars",
+                "betting_data": [
+                    "-8 -110",
+                    "-415",
+                    "u44.5 -115"
+                ]
+            }
+        ],
+        "12:00, PM NE Patriots - NY Jets (CBS)": [
+            {
+                "team_number": "457",
+                "team_name": "NE Patriots",
+                "betting_data": [
+                    "-2.5 -115",
+                    "-145",
+                    "o36 -110"
+                ]
+            },
+            {
+                "team_number": "458",
+                "team_name": "NY Jets",
+                "betting_data": [
+                    "+2.5 -105",
+                    "+125",
+                    "u36 -110"
+                ]
+            }
+        ],
+        "12:00, PM NO Saints - GB Packers (FOX)": [
+            {
+                "team_number": "459",
+                "team_name": "NO Saints",
+                "betting_data": [
+                    "Even",
+                    "o42.5 -110"
+                ]
+            },
+            {
+                "team_number": "460",
+                "team_name": "GB Packers",
+                "betting_data": [
+                    "-120",
+                    "u42.5 -110"
+                ]
+            }
+        ],
+        "12:00, PM DEN Broncos - MIA Dolphins (CBS)": [
+            {
+                "team_number": "461",
+                "team_name": "DEN Broncos",
+                "betting_data": [
+                    "+6.5 -110",
+                    "+225",
+                    "o48 -110"
+                ]
+            },
+            {
+                "team_number": "462",
+                "team_name": "MIA Dolphins",
+                "betting_data": [
+                    "-6.5 -110",
+                    "-285",
+                    "u48 -110"
+                ]
+            }
+        ],
+        "12:00, PM BUF Bills - WAS Commanders (CBS)": [
+            {
+                "team_number": "463",
+                "team_name": "BUF Bills",
+                "betting_data": [
+                    "-6 -115",
+                    "-275",
+                    "o43 -115"
+                ]
+            },
+            {
+                "team_number": "464",
+                "team_name": "WAS Commanders",
+                "betting_data": [
+                    "+6 -105",
+                    "+220",
+                    "u43 -105"
+                ]
+            }
+        ],
+        "12:00, PM ATL Falcons - DET Lions (FOX)": [
+            {
+                "team_number": "465",
+                "team_name": "ATL Falcons",
+                "betting_data": [
+                    "+3.5 -120",
+                    "+145",
+                    "o46 -110"
+                ]
+            },
+            {
+                "team_number": "466",
+                "team_name": "DET Lions",
+                "betting_data": [
+                    "-3.5 Even",
+                    "-170",
+                    "u46 -110"
+                ]
+            }
+        ],
+        "12:00, PM IND Colts - BAL Ravens (CBS)": [
+            {
+                "team_number": "467",
+                "team_name": "IND Colts",
+                "betting_data": [
+                    "Offline"
+                ]
+            },
+            {
+                "team_number": "468",
+                "team_name": "BAL Ravens",
+                "betting_data": []
+            }
+        ],
+        "3:05, PM CAR Panthers - SEA Seahawks (CBS)": [
+            {
+                "team_number": "469",
+                "team_name": "CAR Panthers",
+                "betting_data": [
+                    "+5.5 -110",
+                    "+195",
+                    "o42 -110"
+                ]
+            },
+            {
+                "team_number": "470",
+                "team_name": "SEA Seahawks",
+                "betting_data": [
+                    "-5.5 -110",
+                    "-245",
+                    "u42 -110"
+                ]
+            }
+        ],
+        "3:25, PM DAL Cowboys - ARI Cardinals (FOX)": [
+            {
+                "team_number": "471",
+                "team_name": "DAL Cowboys",
+                "betting_data": [
+                    "-12.5 -110",
+                    "-725",
+                    "o43 -110"
+                ]
+            },
+            {
+                "team_number": "472",
+                "team_name": "ARI Cardinals",
+                "betting_data": [
+                    "+12.5 -110",
+                    "+425",
+                    "u43 -110"
+                ]
+            }
+        ],
+        "3:25, PM CHI Bears - KC Chiefs (FOX)": [
+            {
+                "team_number": "473",
+                "team_name": "CHI Bears",
+                "betting_data": [
+                    "+470"
+                ]
+            },
+            {
+                "team_number": "474",
+                "team_name": "KC Chiefs",
+                "betting_data": [
+                    "-770"
+                ]
+            }
+        ],
+        "7:20, PM PIT Steelers - LV Raiders (NBC)": [
+            {
+                "team_number": "475",
+                "team_name": "PIT Steelers",
+                "betting_data": [
+                    "+2.5 Even",
+                    "+120"
+                ]
+            },
+            {
+                "team_number": "476",
+                "team_name": "LV Raiders",
+                "betting_data": [
+                    "-2.5 -120",
+                    "-140",
+                    "PK -105",
+                    "  o26.5 -115",
+                    "PK -115",
+                    "  u26.5 -105",
+                    "+135",
+                    "o19.5 -110",
+                    "-155",
+                    "u19.5 -110",
+                    "o22.5 -110",
+                    "u22.5 -110",
+                    "-.5 -110",
+                    "-130",
+                    "o18.5 -110",
+                    "+.5 -110",
+                    "+110",
+                    "u18.5 -110",
+                    "+.5 -120",
+                    "  o21 -110",
+                    "-.5 Even",
+                    "  u21 -110",
+                    "+3.5 -105",
+                    "+170",
+                    "o24 Even",
+                    "-3.5 -115",
+                    "-205",
+                    "u24 -120",
+                    "-195",
+                    "o21.5 -110",
+                    "+165",
+                    "u21.5 -110",
+                    "+2 -110",
+                    "+140",
+                    "o23 -105",
+                    "-2 -110",
+                    "-160",
+                    "u23 -115",
+                    "+3 -105",
+                    "o20.5 -110",
+                    "-3 -115",
+                    "-185",
+                    "u20.5 -110",
+                    "-7 -115",
+                    "+7 -105",
+                    "+7 -110",
+                    "+290",
+                    "o24 -105",
+                    "-7 -110",
+                    "-385",
+                    "u24 -115",
+                    "o21 -115",
+                    "u21 -105"
+                ]
+            }
+        ],
+        "6:15, PM PHI Eagles - TB Buccaneers (ABC)": [
+            {
+                "team_number": "477",
+                "team_name": "PHI Eagles",
+                "betting_data": [
+                    "-5 -110",
+                    "-220"
+                ]
+            },
+            {
+                "team_number": "478",
+                "team_name": "TB Buccaneers",
+                "betting_data": [
+                    "+5 -110",
+                    "+180"
+                ]
+            }
+        ],
+        "7:15, PM LA Rams - CIN Bengals (ESPN)": [
+            {
+                "team_number": "479",
+                "team_name": "LA Rams",
+                "betting_data": [
+                    "+2.5 -110",
+                    "+115",
+                    "o43.5 -110"
+                ]
+            },
+            {
+                "team_number": "480",
+                "team_name": "CIN Bengals",
+                "betting_data": [
+                    "-2.5 -110",
+                    "-135",
+                    "u43.5 -110",
+                    "-3 -110",
+                    "o22.5 -115",
+                    "+3 -110",
+                    "u22.5 -105",
+                    "+105",
+                    "-125"
+                ]
+            }
+        ]
+    }
+}

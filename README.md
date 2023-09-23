@@ -6,3 +6,8 @@
 * If you like a bet fine the book with the best odds
 * find largest discrepancy for bets (maybe best for props)
 * 
+
+
+
+ToDo 
+* GCE cron for python uptime and run fetch script 

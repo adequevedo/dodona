@@ -5,8 +5,10 @@ on:
       - main
   workflow_dispatch:
 
-# env:
-#   GCP_BUCKET_URL: "gs://hacktime-site"
+env:
+  ZONE: "us-east1-b"
+  INSTANCE: "dione"
+
 
 jobs:
   deploy:
@@ -21,13 +23,36 @@ jobs:
         credentials_json: '${{ secrets.GCE_SA_KEY }}'
         service_account: 'hacksite-gcs-deploy@hacktime-site.iam.gserviceaccount.com'
 
-    - id: 'compute-ssh'
-      uses: 'google-github-actions/ssh-compute@v0'
-      with:
-        instance_name: 'dione'
-        zone: 'us-east1-b'
-        ssh_private_key: '${{ secrets.GCE_SA_KEY }}'
-        command: 'echo Hello world'
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: 'Deploy to VM'
+      run: |
+      gcloud compute ssh --zone ${{ENV.ZONE}} ${{ENV.INSTANCE}} \
+      --command '
+      echo "Killing Bot" && 
+      echo "DONE"'
+    
+    # - name: 'Deploy to VM'
+    #   run: |
+    #   gcloud compute ssh --zone ${{ENV.ZONE}} ${{ENV.INSTANCE}} \
+    #   --command '
+    #   echo "Killing Bot" && 
+    #   pkill -9 -f bot.py && 
+    #   mkdir -p /home/tmp &&
+    #   cd /home/tmp &&
+    #   git clone https://github.com/adequevedo/dione.git && 
+    #   cp -f dione/bot.py /home/alexdequevedo/bot
+    #   cd /home/alexdequevedo/bot && 
+    #   sudo google_metadata_script_runner startup'
+
+    # - id: 'compute-ssh'
+    #   uses: 'google-github-actions/ssh-compute@v0'
+    #   with:
+    #     instance_name: 'dione'
+    #     zone: 'us-east1-b'
+    #     ssh_private_key: '${{ secrets.GCE_SA_KEY }}'
+    #     command: 'echo Hello world'
 
     # Example of using the output
     # - id: 'test'

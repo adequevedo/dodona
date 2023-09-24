@@ -82,10 +82,7 @@ vs
     return message
 
 intents = discord.Intents.all()
-#intents = discord.Intents.default()
 client = discord.Client(intents=intents)
-#bot = commands.Bot(command_prefix="$",intents=discord.Intents.default())
-#channel = 'wagers-and-such'
 
 @client.event
 async def on_ready():
@@ -106,5 +103,4 @@ async def on_message(message):
         await channel.send(output)
         print(f"{datetime.datetime.now()} - sent message")
 
-client.run('MTE1NDU0MzkxMTk3NzYyMzYyMw.GWL1Kv.lOs9W1nhUlaXoNy40jrMZZvJwtsrWBBUqsSkJo')
-#bot.run('MTE1NDU0MzkxMTk3NzYyMzYyMw.GWL1Kv.lOs9W1nhUlaXoNy40jrMZZvJwtsrWBBUqsSkJo')
+client.run(os.environ.get('DISCORD_KEY'))

@@ -1,0 +1,4 @@
+selenium==4.12.0  # You can specify the version you're using or remove the version to get the latest
+webdriver_manager==4.0.0  # Same here for versioning
+google-cloud-storage
+discord.py

@@ -1,0 +1,36 @@
+name: Deploy to VM
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# env:
+#   GCP_BUCKET_URL: "gs://hacktime-site"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "$GITHUB_CONTEXT"
+    - uses: actions/checkout@v3
+
+    - name: 'GCP Auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCE_SA_KEY }}'
+        service_account: 'hacksite-gcs-deploy@hacktime-site.iam.gserviceaccount.com'
+
+    - id: 'compute-ssh'
+      uses: 'google-github-actions/ssh-compute@v0'
+      with:
+        instance_name: 'dione'
+        zone: 'us-east1-b'
+        ssh_private_key: '${{ secrets.GCE_SA_KEY }}'
+        command: 'echo Hello world'
+
+    # Example of using the output
+    # - id: 'test'
+    #   run: |-
+    #     echo '${{ steps.compute-ssh.outputs.stdout }}'
+    #     echo '${{ steps.compute-ssh.outputs.stderr }}'

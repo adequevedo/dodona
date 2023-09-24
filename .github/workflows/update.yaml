@@ -7,7 +7,7 @@ on:
 
 env:
   ZONE: "us-east1-b"
-  INSTANCE: "dione"
+  INSTANCE: "dionee"
 
 
 jobs:

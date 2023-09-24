@@ -32,8 +32,8 @@ import time
 # login_button = driver.find_element(By.XPATH, '//*[@id="form1"]/input[3]')
 
 # # Input username and password
-# username_field.send_keys("P85908")
-# password_field.send_keys("AG08")
+# username_field.send_keys("")
+# password_field.send_keys("")
 
 # # Click the login button
 # login_button.click()

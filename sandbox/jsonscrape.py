@@ -114,8 +114,8 @@ try:
     password_field = driver.find_element(By.XPATH, '//*[@id="txtAccessOfPassword"]')
     login_button = driver.find_element(By.XPATH, '//*[@id="form1"]/input[3]')
 
-    username_field.send_keys("P85908")
-    password_field.send_keys("AG08")
+    username_field.send_keys("")
+    password_field.send_keys("")
 
     login_button.click()
 

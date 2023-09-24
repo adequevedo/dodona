@@ -103,4 +103,4 @@ async def on_message(message):
         await channel.send(output)
         print(f"{datetime.datetime.now()} - sent message")
 
-client.run(os.environ.get('DISCORD_KEY'))
+client.run(os.environ.get('DISCORD_TOKEN'))

@@ -1,18 +1,25 @@
-# dione
+# dodona
 
-## Ideas 
-* lines that have moved the most since open
-* 
-* If you like a bet fine the book with the best odds
-* find largest discrepancy for bets (maybe best for props)
-* promote code to vm job 
-* tf vm and startup script w/ gitclone 
+**Overview**
 
+dodona is a personal project that contains different components related to sports gambling. The two current components are:
+
+* **wager-bot** - a Python Discord bot that reacts to text prompts.  
+* **web app** - a Node.js web app that shows the different lines for each sportbook for a given bet.
 
 
-ToDo 
-* GCE cron for python uptime and run fetch script 
-* env cleanup 
-* Jenkins for bot?
-* make repo public
-* Starting and stopping on VM 
+
+
+## How to contribute
+
+If you are interested in contributing to dodona, please feel free to fork the repository and create a pull request. I am always happy to accept contributions from the community.
+
+Here are some things to keep in mind when contributing:
+
+    Please follow the code style guide for the language you are contributing to.
+    Please write clear and concise commit messages.
+    Please add tests for any new features or changes you make.
+
+I look forward to your contributions!
+
+

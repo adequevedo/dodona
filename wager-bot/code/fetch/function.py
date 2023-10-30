@@ -66,9 +66,9 @@ def call_api_and_upload_json_to_gcs(api_url, cloud_storage_bucket_name, cloud_st
     blob = bucket.blob(cloud_storage_object_name)
     blob.upload_from_string(json.dumps(json_data), content_type='application/json')
 
-    print('JSON data saved to Cloud Storage bucket successfully.')
+    print(f"{cloud_storage_object_name} saved to Cloud Storage bucket successfully.")
   else:
-    print('Error making API call:', response.status_code, response.content)
+    print(f"Error making API call:", response.status_code, response.content)
 
 
 

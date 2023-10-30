@@ -1,6 +1,7 @@
 import discord, os, datetime, json 
 from collections import deque
 from google.cloud import storage
+from google.cloud import secretmanager
 from discord.ext import commands
 
 def get_file_from_bucket(bucket_name, prefix):
@@ -128,5 +129,10 @@ async def on_message(message):
         # channel = channel
         await channel.send(output)
         print(f"{datetime.datetime.now()} - sent message")
+        
+SECRET_ID = "projects/371661757130/secrets/wager-bot-discord-token"
+client = secretmanager.SecretManagerServiceClient()
+response = client.access_secret_version(request={"name": os.environ.get('SECRET_ID')})
+payload = response.payload.data.decode("UTF-8")
 
-client.run(os.environ.get('DISCORD_TOKEN'))
+client.run(payload)

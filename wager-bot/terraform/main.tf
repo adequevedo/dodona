@@ -199,10 +199,11 @@ resource "google_service_account" "bot" {
   display_name = "bot-account"
 }
 
-resource "google_project_iam_member" "project" {
-  project = var.project_id
-  role    = "roles/secretmanager.secretAccessor"
-  member  = "serviceAccount:${google_service_account.bot.email}"
+resource "google_project_iam_member" "iam" {
+  for_each = toset(["roles/secretmanager.secretAccessor", "roles/storage.objectViewer"])
+  project  = var.project_id
+  role     = each.value
+  member   = "serviceAccount:${google_service_account.bot.email}"
 }
 
 # TODO 

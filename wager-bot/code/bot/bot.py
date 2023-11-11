@@ -4,36 +4,6 @@ from google.cloud import storage
 from google.cloud import secretmanager
 from discord.ext import commands
 
-intents = discord.Intents.all()
-client = discord.Client(intents=intents)
-
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-@client.event
-async def on_message(message):
-    print(message.content)
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$wong'):
-
-        data = get_file_from_bucket("dione", "data/NFL/")
-        output = find_wong(data)
-        channel = message.channel
-        await channel.send(output)
-        print(f"{datetime.datetime.now()} - sent message")
-
-
-SECRET_ID = os.environ.get('SECRET_ID') or "projects/371661757130/secrets/wager-bot-discord-token/versions/latest"
-
-sm_client = secretmanager.SecretManagerServiceClient()
-response = sm_client.access_secret_version(request={"name": SECRET_ID})
-payload = response.payload.data.decode("UTF-8")
-
-client.run(payload)
-
 def get_file_from_bucket(bucket_name, prefix):
     print("File From Bucket")
     try: 
@@ -102,3 +72,34 @@ vs
         print(e)
         
     return message
+
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    print(message.content)
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$wong'):
+
+        data = get_file_from_bucket("dione", "data/NFL/")
+        output = find_wong(data)
+        channel = message.channel
+        await channel.send(output)
+        print(f"{datetime.datetime.now()} - sent message")
+
+
+SECRET_ID = os.environ.get('SECRET_ID') or "projects/371661757130/secrets/wager-bot-discord-token/versions/latest"
+
+sm_client = secretmanager.SecretManagerServiceClient()
+response = sm_client.access_secret_version(request={"name": SECRET_ID})
+payload = response.payload.data.decode("UTF-8")
+
+client.run(payload)
+

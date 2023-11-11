@@ -194,6 +194,10 @@ resource "google_storage_bucket" "bucket" {
   location = "us-east1"
 }
 
+# TODO 
+# service agent acct perms 
+# make bot service account w/ secret manager access 
+
 
 # Enable APIs
 

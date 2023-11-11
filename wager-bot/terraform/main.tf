@@ -15,10 +15,7 @@ resource "google_cloud_scheduler_job" "default" {
   }
 }
 
-resource "google_storage_bucket" "bucket" {
-  name     = "dione"
-  location = "us-east1"
-}
+
 
 resource "google_secret_manager_secret" "default" {
   for_each = toset([
@@ -171,6 +168,26 @@ resource "google_compute_resource_policy" "default" {
     }
   }
 }
+
+resource "random_id" "bucket_prefix" {
+  byte_length = 8
+}
+
+resource "google_storage_bucket" "tf_state" {
+  name          = "${random_id.bucket_prefix.hex}-bucket-tfstate"
+  force_destroy = false
+  location      = "US"
+  storage_class = "STANDARD"
+  versioning {
+    enabled = true
+  }
+}
+
+resource "google_storage_bucket" "bucket" {
+  name     = "dione"
+  location = "us-east1"
+}
+
 
 # Enable APIs
 

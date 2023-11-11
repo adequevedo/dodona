@@ -86,75 +86,76 @@ locals {
   secret_name = split("/", google_secret_manager_secret.default["sports-odds-api-key"].name, )
 }
 
-
-resource "google_compute_instance" "default" {
-
+resource "google_compute_region_instance_template" "wager-bot" {
+  name         = "wager-bot"
   machine_type = "e2-micro"
+  project      = "wager-bot-399722"
+  region       = "us-east1"
   metadata = {
     "startup-script" = <<-EOT
-            whoami
-            sudo su alexdequevedo
-            whoami
-            cd /home/alexdequevedo/bot
+            sudo adduser wager-bot
+            sudo su wager-bot
+            cd /home/wager-bot
+            sudo apt update
+            sudo apt-get -y upgrade
+            sudo apt install -y python3-pip
+            git clone https://github.com/adequevedo/dodona.git
+            cd dodona/wager-bot/code/bot
             pip3 install -r requirements.txt
             python3 bot.py
         EOT
   }
-  name    = "dione"
-  project = "wager-bot-399722"
 
   tags = [
     "http-server",
     "https-server",
   ]
-  zone = "us-east1-b"
 
-  boot_disk {
-    auto_delete = true
-
-    initialize_params {
-      image = "ubuntu-2004-focal-v20230918"
-      size  = 10
-      type  = "pd-standard"
-    }
-  }
-
-
-  service_account {
-    email = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
-    scopes = [
-      "https://www.googleapis.com/auth/devstorage.read_only",
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring.write",
-      "https://www.googleapis.com/auth/service.management.readonly",
-      "https://www.googleapis.com/auth/servicecontrol",
-      "https://www.googleapis.com/auth/trace.append",
-    ]
+  disk {
+    auto_delete  = true
+    boot         = true
+    disk_size_gb = 10
+    disk_type    = "pd-standard"
+    source_image = "ubuntu-os-cloud/ubuntu-2204-jammy-v20231030"
+    type         = "PERSISTENT"
   }
 
   network_interface {
     network = "default"
 
     access_config {
-      network_tier = "STANDARD"
+      network_tier = "PREMIUM"
     }
   }
 
+  reservation_affinity {
+    type = "ANY_RESERVATION"
+  }
 
   scheduling {
-    preemptible       = true
-    automatic_restart = false
+    automatic_restart   = true
+    min_node_cpus       = 0
+    on_host_maintenance = "MIGRATE"
+    preemptible         = false
+    provisioning_model  = "STANDARD"
   }
-  resource_policies = [google_compute_resource_policy.default.id]
 
-  timeouts {}
-  lifecycle {
-    ignore_changes = [
-      metadata
+  service_account {
+    email = "bot-account@wager-bot-399722.iam.gserviceaccount.com"
+    scopes = [
+      "cloud-platform",
     ]
   }
+
 }
 
+resource "google_compute_instance_from_template" "tpl" {
+  name = "wager-bot"
+  zone = "us-east1-b"
+
+  source_instance_template = google_compute_region_instance_template.wager-bot.self_link
+
+}
 
 resource "google_compute_resource_policy" "default" {
   name    = "wager-bot"

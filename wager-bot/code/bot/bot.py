@@ -30,7 +30,6 @@ SECRET_ID = os.environ.get('SECRET_ID') or "projects/371661757130/secrets/wager-
 
 sm_client = secretmanager.SecretManagerServiceClient()
 response = sm_client.access_secret_version(request={"name": SECRET_ID})
-
 payload = response.payload.data.decode("UTF-8")
 
 client.run(payload)

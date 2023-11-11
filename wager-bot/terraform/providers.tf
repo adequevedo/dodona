@@ -12,6 +12,6 @@ terraform {
 
 provider "google" {
   project = "wager-bot-399722"
-  region  = "us-central1"
+  region  = "us-east1"
 }
 

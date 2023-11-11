@@ -16,11 +16,20 @@ def hello_http(request):
     print('Stating Execution')
     
     API_KEY = os.environ.get("API_KEY")
-    API_URL = f"https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?regions=us&oddsFormat=american&markets=h2h,spreads,totals&apiKey={API_KEY}"
     BUCKET = "dione"
     
+    SPORT = "americanfootball_nfl"
+    API_URL = f"https://api.the-odds-api.com/v4/sports/{SPORT}/odds/?regions=us&oddsFormat=american&markets=h2h,spreads,totals&apiKey={API_KEY}"
     ts = time.time()
-    call_api_and_upload_json_to_gcs(API_URL, BUCKET, f"data/{ts}-odds-api.json")
+    #print(API_URL)
+    call_api_and_upload_json_to_gcs(API_URL, BUCKET, f"data/NFL/{ts}-odds-api.json")
+
+    SPORT = "basketball_nba"
+    API_URL = f"https://api.the-odds-api.com/v4/sports/{SPORT}/odds/?regions=us&oddsFormat=american&markets=h2h,spreads,totals&apiKey={API_KEY}"
+    ts = time.time()
+    #print(API_URL)
+    call_api_and_upload_json_to_gcs(API_URL, BUCKET, f"data/NBA/{ts}-odds-api.json")
+
     request_json = request.get_json(silent=True)
     request_args = request.args
 
@@ -57,9 +66,9 @@ def call_api_and_upload_json_to_gcs(api_url, cloud_storage_bucket_name, cloud_st
     blob = bucket.blob(cloud_storage_object_name)
     blob.upload_from_string(json.dumps(json_data), content_type='application/json')
 
-    print('JSON data saved to Cloud Storage bucket successfully.')
+    print(f"{cloud_storage_object_name} saved to Cloud Storage bucket successfully.")
   else:
-    print('Error making API call:', response.status_code, response.content)
+    print(f"Error making API call:", response.status_code, response.content)
 
 
 

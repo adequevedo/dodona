@@ -1,0 +1,4 @@
+*.tfstate*
+**/*.terraform.lock*
+**/.terraform*/**
+wager-bot/terraform/.terraform.lock.hcl

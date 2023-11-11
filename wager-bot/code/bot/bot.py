@@ -4,6 +4,37 @@ from google.cloud import storage
 from google.cloud import secretmanager
 from discord.ext import commands
 
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    print(message.content)
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$wong'):
+
+        data = get_file_from_bucket("dione", "data/NFL/")
+        output = find_wong(data)
+        channel = message.channel
+        await channel.send(output)
+        print(f"{datetime.datetime.now()} - sent message")
+
+
+SECRET_ID = os.environ.get('SECRET_ID') or "projects/371661757130/secrets/wager-bot-discord-token/versions/latest"
+
+sm_client = secretmanager.SecretManagerServiceClient()
+response = sm_client.access_secret_version(request={"name": SECRET_ID})
+
+payload = response.payload.data.decode("UTF-8")
+
+client.run(payload)
+
 def get_file_from_bucket(bucket_name, prefix):
     print("File From Bucket")
     try: 
@@ -26,29 +57,6 @@ def get_file_from_bucket(bucket_name, prefix):
     except Exception as e: 
         print("ERROR: ", e)
 
-
-
-def get_latest_json_file(directory):
-  """Returns the latest JSON file in the given directory.
-
-  Args:
-    directory: The directory to search.
-
-  Returns:
-    The latest JSON file, or None if no JSON files are found.
-  """
-
-  files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f.endswith(".json")]
-
-  # Sort the files by timestamp, with the most recent file first.
-  files.sort(key=lambda f: os.path.getmtime(os.path.join(directory, f)), reverse=True)
-
-  # Return the most recent JSON file.
-  if files:
-    print(files[0])
-    return files[0]
-  else:
-    return None
 
 def find_wong(data):
     print("Starting Wong")
@@ -102,37 +110,3 @@ vs
         print(e)
         
     return message
-
-intents = discord.Intents.all()
-client = discord.Client(intents=intents)
-
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-@client.event
-async def on_message(message):
-    print(message.content)
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$wong'):
-
-        # Deprecated way of getting files
-        # file_name = "data/" + get_latest_json_file('data/')
-        # f = open(file_name)
-        # old_data = json.load(f)
-
-        data = get_file_from_bucket("dione", "data/NFL/")
-        output = find_wong(data)
-        channel = message.channel
-        # channel = channel
-        await channel.send(output)
-        print(f"{datetime.datetime.now()} - sent message")
-        
-SECRET_ID = "projects/371661757130/secrets/wager-bot-discord-token"
-client = secretmanager.SecretManagerServiceClient()
-response = client.access_secret_version(request={"name": os.environ.get('SECRET_ID')})
-payload = response.payload.data.decode("UTF-8")
-
-client.run(payload)

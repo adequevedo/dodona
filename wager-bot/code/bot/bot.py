@@ -4,10 +4,12 @@ from google.cloud import storage
 from google.cloud import secretmanager
 from discord.ext import commands
 
+PROJECT = os.environ.get('PROJECT_ID') or "wager-bot-399722 "
+
 def get_file_from_bucket(bucket_name, prefix):
     print("File From Bucket")
     try: 
-        storage_client = storage.Client()
+        storage_client = storage.Client(project=PROJECT)
         bucket = storage_client.bucket(bucket_name)
         
         # List objects in bucket, then get most recent object 

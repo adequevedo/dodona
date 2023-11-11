@@ -141,7 +141,7 @@ resource "google_compute_region_instance_template" "wager-bot" {
   }
 
   service_account {
-    email = "bot-account@wager-bot-399722.iam.gserviceaccount.com"
+    email = google_service_account.bot.email
     scopes = [
       "cloud-platform",
     ]
@@ -192,6 +192,17 @@ resource "google_storage_bucket" "tf_state" {
 resource "google_storage_bucket" "bucket" {
   name     = "dione"
   location = "us-east1"
+}
+
+resource "google_service_account" "bot" {
+  account_id   = "bot-account"
+  display_name = "bot-account"
+}
+
+resource "google_project_iam_member" "project" {
+  project = var.project_id
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${google_service_account.bot.email}"
 }
 
 # TODO 

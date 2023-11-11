@@ -1,12 +1,17 @@
+data "google_project" "project" {
+  project_id = "wager-bot-399722"
+}
+
+
 resource "google_cloud_scheduler_job" "default" {
   name     = "odds-api-daily"
   schedule = "0 14 * * * "
   http_target {
     http_method = "POST"
-    uri         = "https://us-central1-wager-bot-399722.cloudfunctions.net/function-1"
+    uri         = google_cloudfunctions2_function.function.url
     body        = base64encode("{\"name \":\"Hello World\"}")
     oidc_token {
-      service_account_email = "371661757130-compute@developer.gserviceaccount.com"
+      service_account_email = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
       audience              = "https://us-central1-wager-bot-399722.cloudfunctions.net/function-1"
     }
   }
@@ -23,7 +28,7 @@ resource "google_secret_manager_secret" "default" {
     "wager-bot-discord-token"
   ])
 
-  project   = "371661757130"
+  project   = data.google_project.project.number
   secret_id = each.key
 
   replication {
@@ -63,7 +68,7 @@ resource "google_cloudfunctions2_function" "function" {
     max_instance_count               = 59
     max_instance_request_concurrency = 1
     min_instance_count               = 0
-    service_account_email            = "371661757130-compute@developer.gserviceaccount.com"
+    service_account_email            = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     timeout_seconds                  = 60
 
     secret_environment_variables {
@@ -116,7 +121,7 @@ resource "google_compute_instance" "default" {
 
 
   service_account {
-    email = "371661757130-compute@developer.gserviceaccount.com"
+    email = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     scopes = [
       "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/logging.write",
@@ -153,7 +158,7 @@ resource "google_compute_instance" "default" {
 
 resource "google_compute_resource_policy" "default" {
   name    = "wager-bot"
-  project = "wager-bot-399722"
+  project = trim(data.google_project.project.id, "projects/")
   region  = "us-east1"
 
   instance_schedule_policy {
@@ -209,35 +214,4 @@ resource "google_storage_bucket" "bucket" {
 #   }
 
 #   disable_dependent_services = true
-# }
-
-
-
-# ##################################################
-# Backend Service Account
-# ##################################################
-
-# resource "google_service_account" "backend_service_account" {
-#   project      = var.project_id
-#   account_id   = "employees-backend-sa"
-#   display_name = "employees-backend-sa"
-#   description  = "Service account for Amazing Employees Backend"
-
-#   depends_on = [
-#     google_project_service.project["cloudresourcemanager.googleapis.com"],
-#     google_project_service.project["iam.googleapis.com"],
-#     google_project_service.project["compute.googleapis.com"],
-#   ]
-# }
-
-# resource "google_project_iam_member" "backend_iam_member" {
-#   project = var.project_id
-#   role    = "roles/datastore.user"
-#   member  = "serviceAccount:${google_service_account.backend_service_account.email}"
-
-#   depends_on = [
-#     google_project_service.project["cloudresourcemanager.googleapis.com"],
-#     google_project_service.project["iam.googleapis.com"],
-#     google_project_service.project["compute.googleapis.com"],
-#   ]
 # }

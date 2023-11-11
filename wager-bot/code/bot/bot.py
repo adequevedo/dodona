@@ -46,9 +46,7 @@ def get_file_from_bucket(bucket_name, prefix):
         last_element = dd.pop()
         
         blob = bucket.blob(last_element.name)
-        # print(last_element.name)
         contents = blob.download_as_string()
-        # my_json = contents.decode('utf8').replace("'", '"')
         data = json.loads(contents)
                 
         return data
@@ -65,13 +63,11 @@ def find_wong(data):
     try: 
         for matchup in data: 
             home_team = matchup['home_team']
-            # away_team = matchup['away_team']
             for y in matchup['bookmakers']:
                 if y['key'] == 'betus' and y['markets'][1]['key'] == 'spreads':
                     # y['markets'][1]['outcomes'] is the either h2h, spread, totals; If this order is messed up, no h2h bc its a pickem
                     # 4 checks home and away favorite and dog 
                     if(y['markets'][1]['outcomes'][0]['point'] >= 1.5 and y['markets'][1]['outcomes'][0]['point'] <= 3):
-                        # if home_team == y['markets'][1]['outcomes'][0]['name']: message += "(H) "
                         message += "(H) " if home_team == y['markets'][1]['outcomes'][0]['name'] else "(A) "
                         message += f'''{y['markets'][1]['outcomes'][0]['name']} +{y['markets'][1]['outcomes'][0]['point']}
 vs
@@ -80,7 +76,6 @@ vs
 '''
 
                     if(y['markets'][1]['outcomes'][0]['point'] <= -7.5 and y['markets'][1]['outcomes'][0]['point'] >= -9):
-                        # if home_team == y['markets'][1]['outcomes'][0]['name']: message += "(H) "
                         message += "(H) " if home_team == y['markets'][1]['outcomes'][0]['name'] else "(A) "
                         message += f'''{y['markets'][1]['outcomes'][0]['name']} {y['markets'][1]['outcomes'][0]['point']}
 vs
@@ -89,7 +84,6 @@ vs
 '''
                         
                     if(y['markets'][1]['outcomes'][1]['point'] >= 1.5 and y['markets'][1]['outcomes'][1]['point'] <= 3):
-                        # if home_team == y['markets'][1]['outcomes'][1]['name']: message += "(H) "
                         message += "(H) " if home_team == y['markets'][1]['outcomes'][1]['name'] else "(A) "
                         message += f'''{y['markets'][1]['outcomes'][1]['name']} +{y['markets'][1]['outcomes'][1]['point']}
 vs
@@ -98,7 +92,6 @@ vs
 '''
                         
                     if(y['markets'][1]['outcomes'][1]['point'] <= -7.5 and y['markets'][1]['outcomes'][1]['point'] >= -9):
-                        # if home_team == y['markets'][1]['outcomes'][1]['name']: message += "(H) "
                         message += "(H) " if home_team == y['markets'][1]['outcomes'][1]['name'] else "(A) "
                         message += f'''{y['markets'][1]['outcomes'][1]['name']} {y['markets'][1]['outcomes'][1]['point']}
 vs

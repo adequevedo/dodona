@@ -2,11 +2,9 @@
 
 **Overview**
 
-dodona is a personal project that contains different components related to sports gambling. The two current components are:
+dodona is a personal project that contains different components of various uses and interests. The current component(s) are:
 
 * **wager-bot** - a Python Discord bot that reacts to text prompts.  
-* **web app** - a Node.js web app that shows the different lines for each sportbook for a given bet.
-
 
 
 

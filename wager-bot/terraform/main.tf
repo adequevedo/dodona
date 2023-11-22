@@ -11,7 +11,7 @@ resource "google_cloud_scheduler_job" "default" {
     uri         = google_cloudfunctions2_function.function.url
     body        = base64encode("{\"name \":\"Hello World\"}")
     oidc_token {
-      service_account_email = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+      service_account_email = google_service_account.bot.email
       audience              = "https://us-central1-wager-bot-399722.cloudfunctions.net/function-1"
     }
   }
@@ -68,7 +68,7 @@ resource "google_cloudfunctions2_function" "function" {
     max_instance_count               = 59
     max_instance_request_concurrency = 1
     min_instance_count               = 0
-    service_account_email            = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+    service_account_email            = google_service_account.bot.email
     timeout_seconds                  = 60
 
     secret_environment_variables {
@@ -199,6 +199,7 @@ resource "google_service_account" "bot" {
   display_name = "bot-account"
 }
 
+# TODO all roles for fetch function to work, bucket legacy something 
 resource "google_project_iam_member" "iam" {
   for_each = toset(["roles/secretmanager.secretAccessor", "roles/storage.objectViewer"])
   project  = var.project_id
